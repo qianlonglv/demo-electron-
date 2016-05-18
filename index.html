@@ -2,12 +2,25 @@
 <html>
   <head>
     <title>Hello World!</title>
-    <script type="text/javascript" src="index.js"></script>
+    <!--<script type="text/javascript" src="index.js">-->
+    </script><script>window.$ = window.jQuery = require('jquery');</script>
+      <script>
+          $(document).ready(function(){
+              $("#btn1").click(function(){
+                  var content = $("#searchbar").val();
+                  console.log(content);
+                  $("#item").append("<li>" + content + "</li>");
+              });
+          });
+      </script>
+
   </head>
   <body>
     <input type="text" name="content" id="searchbar"></input>
-    <button type="button" onclick="onclickBtn()">search</button>
-    <div id="insert"></div>
+    <button type="button" id="btn1">search</button>
+    <div id="insert">
+        <ol id="item"></ol>
+    </div>
   </body>
 
 </html>
