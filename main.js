@@ -14,6 +14,8 @@ app.on('window-all-closed', function() {
     app.quit();
 });
 
+var argv = require('yargs').parse(process.argv.slice(1));
+
 // 当 Electron 完成了初始化并且准备创建浏览器窗口的时候
 // 这个方法就被调用
 app.on('ready', function() {
@@ -21,11 +23,8 @@ app.on('ready', function() {
 
   // 创建浏览器窗口。
 
-  var argv = require('yargs').parse(process.argv.slice(1));
-  if (argv.test == 1)
-      mainWindow = new BrowserWindow({width: 800, height: 600});
-  else
-      mainWindow = new BrowserWindow({width:1500, height:600});
+  mainWindow = new BrowserWindow({width: 800, height: 600});
+
 
   // 加载应用的 index.html
   mainWindow.loadURL('file://' + __dirname + '/index.html');
@@ -41,3 +40,11 @@ app.on('ready', function() {
     mainWindow = null;
   });
 });
+
+app.on('browser-window-created', function () {
+  //传递文件名到窗口
+  var ipcMain = require('electron').ipcMain;
+  ipcMain.on('getfileName_msg', function (event, arg) {
+    event.sender.send('filenamepost_msg', argv.filename);
+  })
+})

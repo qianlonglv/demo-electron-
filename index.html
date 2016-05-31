@@ -20,6 +20,12 @@
                   $("#item").append("<li>" + content + "</li>");
               });
           });
+
+          const  ipcRenderer = window.nodeRequire('electron').ipcRenderer;
+          ipcRenderer.send('getfileName_msg','');
+          ipcRenderer.on('filenamepost_msg', function (event, arg) {
+              $("#item").append("<li>" + 'command line args:' + arg + "</li>");
+          })
       </script>
 
 
