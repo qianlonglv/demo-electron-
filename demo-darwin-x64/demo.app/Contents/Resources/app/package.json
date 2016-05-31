@@ -36,5 +36,9 @@
     "semantic-ui": "^2.1.8",
     "yamljs": "^0.2.7",
     "yargs": "^4.7.1"
+  },
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-packager ./ demo --all --out ~/Desktop/demo --version 1.2.0 --overwrite"
   }
 }
